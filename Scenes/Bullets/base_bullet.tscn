@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d34gor76hxl6h"]
+
+[ext_resource type="PackedScene" uid="uid://dghli0iiktlnq" path="res://Scenes/LifeTimer/life_timer.tscn" id="1_kd1mq"]
+[ext_resource type="Script" uid="uid://bkbq703taocwq" path="res://Scenes/Bullets/base_bullet.gd" id="1_yj0dc"]
+
+[node name="BaseBullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_yj0dc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="LifeTimer" parent="." instance=ExtResource("1_kd1mq")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

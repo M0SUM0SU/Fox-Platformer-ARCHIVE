@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc42bq2rq4pvy"]
+
+[ext_resource type="Script" uid="uid://ffh0rqsmrb5k" path="res://Scenes/UI/highscore_display.gd" id="1_wgsiq"]
+[ext_resource type="FontFile" uid="uid://u4isxdwe4bys" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_yf453"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wgsiq"]
+font = ExtResource("1_yf453")
+font_size = 32
+font_color = Color(0.14902, 0.443137, 0.662745, 1)
+outline_size = 10
+outline_color = Color(0.560784, 1, 1, 0.670588)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yf453"]
+font = ExtResource("1_yf453")
+font_size = 18
+font_color = Color(0.14902, 0.286275, 0.662745, 1)
+outline_size = 10
+outline_color = Color(0.560784, 1, 1, 0.792157)
+
+[node name="HighscoreDisplay" type="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wgsiq")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+text = "00000"
+label_settings = SubResource("LabelSettings_wgsiq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Date" type="Label" parent="."]
+layout_mode = 2
+text = "00/00/0000"
+label_settings = SubResource("LabelSettings_yf453")
+horizontal_alignment = 1
+vertical_alignment = 1

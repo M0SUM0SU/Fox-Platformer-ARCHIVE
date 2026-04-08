@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://dr7im4cm3vbmw"]
+
+[ext_resource type="PackedScene" uid="uid://cavoy862vf44c" path="res://Scenes/EnemyBase/enemy_base.tscn" id="1_o0oaw"]
+[ext_resource type="Script" uid="uid://d1fqmpqu2is2a" path="res://Scenes/EnemyBase/frog.gd" id="2_ikav6"]
+[ext_resource type="Texture2D" uid="uid://daldbb4f4va8d" path="res://assets/enemies/frog/frog_sheet.png" id="2_ru7vk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru7vk"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikav6"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sah78"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wraif"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4a0p"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cebs"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(140, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru7vk"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(175, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yl12"]
+atlas = ExtResource("2_ru7vk")
+region = Rect2(210, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yl12"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ikav6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sah78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wraif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4a0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cebs")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru7vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yl12")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikav6"]
+size = Vector2(20, 16)
+
+[node name="Frog" instance=ExtResource("1_o0oaw")]
+script = ExtResource("2_ikav6")
+
+[node name="CollisionShape2D" parent="." index="0"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ru7vk")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_4yl12")
+animation = &"Jump"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_ikav6")
+
+[node name="JumpTimer" type="Timer" parent="." index="4"]
+one_shot = true
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvhrlyek7lhyh"]
+
+[ext_resource type="Script" uid="uid://bm1jejylh4e6e" path="res://Scenes/UI/hud.gd" id="1_fdl0h"]
+[ext_resource type="FontFile" uid="uid://u4isxdwe4bys" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_ny26j"]
+[ext_resource type="Texture2D" uid="uid://cf1sng6klaht4" path="res://assets/items/pixel heart 2.png" id="2_fdl0h"]
+[ext_resource type="LabelSettings" uid="uid://caxujpek8wcrd" path="res://Scenes/UI/CompleteText.tres" id="4_8glcj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8glcj"]
+font = ExtResource("1_ny26j")
+font_size = 35
+font_color = Color(0.694118, 0.756863, 1, 1)
+outline_size = 10
+outline_color = Color(2.61831e-05, 0.138324, 0.45467, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vsu76"]
+font = ExtResource("1_ny26j")
+font_size = 25
+font_color = Color(1, 1, 0.392157, 1)
+outline_size = 20
+outline_color = Color(0.513726, 0.34902, 0.0823529, 1)
+
+[node name="HUD" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fdl0h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "00000
+"
+label_settings = SubResource("LabelSettings_8glcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBLives" type="HBoxContainer" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = -8
+
+[node name="H1" type="TextureRect" parent="MarginContainer/HBLives"]
+layout_mode = 2
+texture = ExtResource("2_fdl0h")
+stretch_mode = 4
+
+[node name="H2" type="TextureRect" parent="MarginContainer/HBLives"]
+layout_mode = 2
+texture = ExtResource("2_fdl0h")
+stretch_mode = 4
+
+[node name="H3" type="TextureRect" parent="MarginContainer/HBLives"]
+layout_mode = 2
+texture = ExtResource("2_fdl0h")
+stretch_mode = 4
+
+[node name="H4" type="TextureRect" parent="MarginContainer/HBLives"]
+layout_mode = 2
+texture = ExtResource("2_fdl0h")
+stretch_mode = 4
+
+[node name="H5" type="TextureRect" parent="MarginContainer/HBLives"]
+layout_mode = 2
+texture = ExtResource("2_fdl0h")
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.0666667, 0.113725, 0.886275)
+
+[node name="VBGameOver" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="ColorRect/VBGameOver"]
+layout_mode = 2
+text = "Game Over"
+label_settings = ExtResource("4_8glcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Label" type="Label" parent="ColorRect/VBGameOver"]
+layout_mode = 2
+text = "Press F"
+label_settings = SubResource("LabelSettings_vsu76")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBComplete" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="ColorRect/VBComplete"]
+layout_mode = 2
+text = "Level Complete!"
+label_settings = ExtResource("4_8glcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Label" type="Label" parent="ColorRect/VBComplete"]
+layout_mode = 2
+text = "Press F"
+label_settings = SubResource("LabelSettings_vsu76")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CompleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="CompleteTimer" to="." method="_on_complete_timer_timeout"]

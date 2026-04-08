@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0gbyhfd3uqkc"]
+
+[ext_resource type="PackedScene" uid="uid://d34gor76hxl6h" path="res://Scenes/Bullets/base_bullet.tscn" id="1_8ln4g"]
+[ext_resource type="Texture2D" uid="uid://co5352pohsfc3" path="res://assets/items/bullet2.png" id="2_b3chp"]
+[ext_resource type="Shape2D" uid="uid://dargg8fgredwf" path="res://Scenes/Bullets/Bullet_Shape2D.tres" id="3_0hbaj"]
+
+[node name="Enemy_Bullet" instance=ExtResource("1_8ln4g")]
+collision_layer = 16
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_b3chp")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = ExtResource("3_0hbaj")

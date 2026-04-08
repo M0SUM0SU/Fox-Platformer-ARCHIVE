@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://8u8nlfv5ec6f"]
+
+[ext_resource type="Script" uid="uid://bk8ovs8ykv66r" path="res://Scenes/Shooter/shooter.gd" id="1_fhrea"]
+[ext_resource type="AudioStream" uid="uid://2bt4wness10" path="res://assets/sound/laser.wav" id="2_w5yxm"]
+
+[node name="Shooter" type="Node2D"]
+script = ExtResource("1_fhrea")
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_w5yxm")
+volume_db = -30.0
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

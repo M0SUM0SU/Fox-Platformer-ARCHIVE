@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmolckxbcpmbl"]
+
+[ext_resource type="PackedScene" uid="uid://d34gor76hxl6h" path="res://Scenes/Bullets/base_bullet.tscn" id="1_0ju23"]
+[ext_resource type="Texture2D" uid="uid://d2qyapx14s4ym" path="res://assets/items/bullet1.png" id="2_c845f"]
+[ext_resource type="Shape2D" uid="uid://dargg8fgredwf" path="res://Scenes/Bullets/Bullet_Shape2D.tres" id="3_ljjqt"]
+
+[node name="Player_Bullet" instance=ExtResource("1_0ju23")]
+collision_layer = 4
+collision_mask = 9
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_c845f")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = ExtResource("3_ljjqt")
+
+[node name="LifeTimer" parent="." index="2"]
+life_time = 1.0

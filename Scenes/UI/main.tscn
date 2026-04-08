@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://b078ialxpj7xy"]
+
+[ext_resource type="Texture2D" uid="uid://dn8125hf0mjmk" path="res://assets/backgrounds/game_background_3/game_background_3.1.png" id="1_otj8o"]
+[ext_resource type="Script" uid="uid://dwbgxiwq2v5i0" path="res://Scenes/UI/main.gd" id="1_wjop8"]
+[ext_resource type="FontFile" uid="uid://u4isxdwe4bys" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_37xw0"]
+[ext_resource type="AudioStream" uid="uid://catq5c6r5dga2" path="res://assets/sound/Farm Frolics.ogg" id="3_ereyx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ereyx"]
+font = ExtResource("2_37xw0")
+font_size = 90
+font_color = Color(0.239216, 0.00784314, 0.564706, 1)
+outline_size = 10
+outline_color = Color(0.67451, 0.894118, 1, 0.411765)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wjop8")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_otj8o")
+expand_mode = 2
+
+[node name="Shade" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0.239216)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "FOXY ANTICS"
+label_settings = SubResource("LabelSettings_ereyx")
+horizontal_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ereyx")
+volume_db = -20.0
+autoplay = true
+parameters/looping = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 5

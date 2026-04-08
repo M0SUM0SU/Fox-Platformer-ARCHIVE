@@ -1,0 +1,167 @@
+[gd_scene load_steps=16 format=3 uid="uid://c3mjno6hd25ny"]
+
+[ext_resource type="Texture2D" uid="uid://bh2vxrdt5pbum" path="res://assets/items/checkpoint.png" id="1_slu0t"]
+[ext_resource type="Script" uid="uid://crl0uqyrli6e" path="res://Scenes/LevelBase/checkpoint.gd" id="1_w22v2"]
+[ext_resource type="AudioStream" uid="uid://cisuycb8m6abh" path="res://assets/sound/checkpoint.wav" id="3_14mhf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xcxu"]
+size = Vector2(39, 158)
+
+[sub_resource type="Animation" id="Animation_slu0t"]
+resource_name = "Open"
+length = 2.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_14mhf")
+}],
+"times": PackedFloat32Array(1.1)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_w22v2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_14mhf"]
+resource_name = "Flap"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_14mhf"]
+_data = {
+&"Flap": SubResource("Animation_14mhf"),
+&"Open": SubResource("Animation_slu0t"),
+&"RESET": SubResource("Animation_w22v2")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14mhf"]
+animation = &"Flap"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_717o7"]
+animation = &"Open"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_slu0t"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w22v2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14mhf"]
+advance_mode = 2
+advance_expression = "_boss_killed == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_717o7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_b1vd4"]
+states/Flap/node = SubResource("AnimationNodeAnimation_14mhf")
+states/Flap/position = Vector2(676, 100)
+states/Open/node = SubResource("AnimationNodeAnimation_717o7")
+states/Open/position = Vector2(519, 100)
+states/RESET/node = SubResource("AnimationNodeAnimation_slu0t")
+states/RESET/position = Vector2(319, 100)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_w22v2"), "RESET", "Open", SubResource("AnimationNodeStateMachineTransition_14mhf"), "Open", "Flap", SubResource("AnimationNodeStateMachineTransition_717o7")]
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+script = ExtResource("1_w22v2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, -69)
+shape = SubResource("RectangleShape2D_0xcxu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_slu0t")
+offset = Vector2(0, -32)
+hframes = 26
+vframes = 3
+frame = 26
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_14mhf")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_b1vd4")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -20.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
